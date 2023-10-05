@@ -36,6 +36,7 @@ export function Home() {
 
   async function fetchTags() {
    const response = await api.get('/tags')
+   
    setTags(response.data)
   }
 

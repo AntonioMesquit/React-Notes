@@ -1,10 +1,11 @@
 import { Container, Form, Avatar } from "./style";
-import { useState } from "react";
+import { useState,  } from "react";
 import {FiArrowLeft, FiUser, FiMail,FiLock, FiCamera} from 'react-icons/fi'
 import { Input } from "../../components/input";
 import { Button } from "../../components/button";
 import { Link } from 'react-router-dom';
 import avatarPlaceholder from "../../assets/icon-user.svg"
+import { useNavigate } from "react-router-dom";
 import { useAuth } from "../../hooks/auth";
 import { api } from "../../services/api";
 
@@ -15,7 +16,7 @@ const [name, setName] = useState(user.name)
 const [email, setEmail] = useState(user.email)
 const [passwordOld, setPasswordOld] = useState()
 const [passwordNew, setPasswordNew] = useState()
-
+const navigate = useNavigate()
 const avatarUrl = user.avatar ? `${api.defaults.baseURL}/files/${user.avatar}` : avatarPlaceholder
 const [avatar , setAvatar] = useState(user.avatar)
 const [avatarFile , setAvatarFile] = useState(null)
@@ -29,6 +30,8 @@ async function handleUpdate(){
             old_password: passwordOld,
         }
     await updateProfile({user, avatarFile})
+    navigate("/")
+    
 }
 function handleChangeAvatar(event){
     const file = event.target.files[0];
