@@ -15,7 +15,6 @@ function AuthProvider({ children }) {
       const response = await api.post("/sessions", { email, password })
 
       const { user, token } = response.data
-      console.log(response.data)
 
 
       localStorage.setItem("@rocketnotes:user", JSON.stringify(user))
