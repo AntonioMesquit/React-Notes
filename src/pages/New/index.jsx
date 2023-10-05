@@ -6,20 +6,21 @@ import {Section} from '../../components/section'
 import { Button } from '../../components/button'
 import { Link } from 'react-router-dom'
 import { useState } from 'react'
-
+import { api } from '../../services/api'
 import { Container, Form } from './style'
+import { useNavigate } from 'react-router-dom'
 
 export function New(){
 
-
+const [title, setTitle] = useState("")
+const [description, setDescription] = useState("")
 const [links, setLinks] = useState([]);
 const [newLink, setNewLink] = useState("")
-
-
 const [tags, setTags] = useState([]);
 const [newTag, setNewTag] = useState("")
+const navigate = useNavigate()
 function handleAddLink(){
-    
+
     setLinks(prevState => [...prevState, newLink])
     setNewLink("")
 }
@@ -36,7 +37,26 @@ function handleRemoveTag(deleted){
     setTags(prevState => prevState.filter(tag => tag !== deleted))
 
 }
-
+async function handleNewNote(){
+    if(!title){
+        return alert("Digite o titulo da nota!")
+    }
+    if(newLink){
+        return alert("Voce deixou algum Link no campo de adicionar, porem nao clicou pra adicionar!");
+    }
+    if(newTag){
+        return alert("Voce deixou alguma tag no campo de adicionar, porem nao clicou pra adicionar!");
+    }
+   
+api.post("/notes" , {
+    title,
+    description,
+    tags,
+    links
+})
+alert("Nota criada com sucesso!");
+navigate("/")
+}
 
 
 
@@ -56,9 +76,12 @@ function handleRemoveTag(deleted){
         </header>
         <Input 
             placeholder="Titulo"
+            onChange={ e=> setTitle(e.target.value)}
         />
         <TextArea
         placeholder="Observacoes"
+        onChange={ e=> setDescription(e.target.value)}
+
         />
         <Section title="Links Uteis">
             {
@@ -99,7 +122,7 @@ function handleRemoveTag(deleted){
           onClick={handleAddTag}
           />
         </div>
-        <Button title="Salvar"/>
+        <Button title="Salvar" onClick={handleNewNote}/>
 
         </Section>
     </Form>
