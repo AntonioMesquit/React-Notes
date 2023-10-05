@@ -11,7 +11,7 @@ color: ${({theme}) => theme.COLORS.GRAY_300};
 border: ${({ theme, $IsNew }) =>
  $IsNew ? `1px dashed ${theme.COLORS.GRAY_300}` : "none"};
 
-margin-bottom: 8px;
+margin-bottom: 10px;
 border-radius: 10px;
 padding-right: 16px;
 
