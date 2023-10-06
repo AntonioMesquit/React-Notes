@@ -67,6 +67,7 @@ flex-direction: column;
     font-size: 16px;
     margin-top: 16px;
     text-align: justify;
+    white-space: pre-line;
 }
 
 
