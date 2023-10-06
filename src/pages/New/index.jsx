@@ -57,7 +57,7 @@ export function New() {
     if (tags.length === 0) {
       return alert("Adicione pelo menos uma tag!");
     }
-
+   
     const noteData = {
       title,
       description,
