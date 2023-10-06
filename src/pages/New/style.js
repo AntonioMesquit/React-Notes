@@ -22,7 +22,15 @@ grid-template-areas:
 .tags{
     display: flex; 
     flex-wrap: wrap;
-    justify-content: center;
+    justify-content: space-between;
+}
+
+@media screen and (max-width: 550px){
+    .tags{
+        justify-content: center;
+       
+    }
+  
 }
 `
 export const Form = styled.form`
