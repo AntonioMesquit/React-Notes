@@ -7,6 +7,7 @@ border: none;
 border-radius: 10px;
 padding: 22px;
 margin-bottom: 16px;
+
 > h1{
     flex: 1;
     text-align: left;
@@ -17,8 +18,16 @@ margin-bottom: 16px;
 >footer{
     width: 100%;
     display: flex;
+   
     margin-top: 24px;
     
 }
-
+@media screen and (max-width: 650px){
+    >footer{
+    display: flex;
+    flex-wrap: wrap;
+    gap: 5px;
+    justify-content: space-around;
+    }
+}
 `

@@ -9,6 +9,10 @@ margin-right: 6px;
 color: ${({theme}) => theme.COLORS.BACKGROUND_900};
 background-color: ${({theme}) => theme.COLORS.ORANGE};
 
+@media screen and (max-width: 550px) {
+    max-width: 100px;
+   
+}
 
 
 `

@@ -18,28 +18,31 @@ const [passwordOld, setPasswordOld] = useState()
 const [passwordNew, setPasswordNew] = useState()
 const navigate = useNavigate()
 const avatarUrl = user.avatar ? `${api.defaults.baseURL}/files/${user.avatar}` : avatarPlaceholder
-const [avatar , setAvatar] = useState(user.avatar)
+const [avatar , setAvatar] = useState(avatarUrl)
 const [avatarFile , setAvatarFile] = useState(null)
 
 
 async function handleUpdate(){
-        const user ={
+        const updated ={
             name,
             email,
             password: passwordNew,
             old_password: passwordOld,
         }
-    await updateProfile({user, avatarFile})
+
+    const userUpdated = Object.assign(user, updated)
+        
+    await updateProfile({user: userUpdated, avatarFile})
     navigate("/")
     
 }
-function handleChangeAvatar(event){
+function handleChangeAvatar(event) {
     const file = event.target.files[0];
     setAvatarFile(file);
-    
+
     const imagePreview = URL.createObjectURL(file);
-    setAvatar(imagePreview)
-}
+    setAvatar(imagePreview);
+  }
 
 
 
@@ -53,8 +56,10 @@ function handleChangeAvatar(event){
         </header>
 
         <Form>
+
+
    <Avatar>
-    <img src={avatarUrl}/>
+    <img src={avatar}/>
     <label htmlFor="avatar">
    <FiCamera/>
    <input 

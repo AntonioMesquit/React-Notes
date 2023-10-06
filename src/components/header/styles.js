@@ -12,7 +12,10 @@ display: flex;
 justify-content: space-between;
 padding: 0 80px;
 
-
+@media screen and (max-width: 550px) {
+padding: 0;
+padding-inline: 20px;
+    }
 
 
 `
@@ -47,6 +50,9 @@ align-items: center;
     
     }
 }
+@media screen and (max-width: 550px) {
+
+}
 
 `
 export const Logout = styled.button`
@@ -62,6 +68,8 @@ font-size: 30px;
 
 
 }
+
+
 
 
 `

@@ -1,7 +1,7 @@
 import styled from "styled-components";
 
 export const Container = styled.div`
-width: 100%;
+width: 100vw;
 
 
 > header{
@@ -11,7 +11,7 @@ width: 100%;
 
     display: flex;
     align-items: center;
-    padding: 0 124px;
+    padding: 0 50px;
     
     svg{
         color: ${({theme}) => theme.COLORS.GRAY_100};
@@ -19,6 +19,7 @@ width: 100%;
 
     }
 }
+
 
 `
 

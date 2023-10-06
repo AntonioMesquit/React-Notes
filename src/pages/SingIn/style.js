@@ -39,6 +39,11 @@ text-align: center;
 
 }
 
+@media screen and (max-width: 500px){
+    width: 100%;
+    padding: 20px;
+}
+
 `
 export const Background = styled.div`
     flex: 1;

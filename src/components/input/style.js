@@ -10,6 +10,7 @@ color: ${({theme }) => theme.COLORS.GRAY_300};
 margin-bottom: 8px;
 border-radius: 10px;
 
+
 > input{
     height: 56px;
     width: 100%;
@@ -26,4 +27,7 @@ border-radius: 10px;
 > svg{
     margin-left:16px;
 }
+
+
+
 `

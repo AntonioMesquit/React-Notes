@@ -39,9 +39,25 @@ text-align: center;
 
 }
 
+@media screen and (max-width: 500px) {
+justify-content: center;
+align-items: center;
+padding-inline: 30px;
+margin-top: 120px;
+width: 100%;
+
+> a{
+    margin-top: 50px;
+    margin-bottom: 100px;
+}
+}
+
 `
 export const Background = styled.div`
     flex: 1;
     background: url(${backgroundImg}) no-repeat center center;
     background-size: cover;
+    @media screen and (max-width: 500px) {
+display: none;
+}
 `;

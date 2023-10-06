@@ -11,12 +11,27 @@ grid-template-areas:
 
 ;
 
+
 > main {
     grid-area: content;
     overflow-y: scroll;
     padding: 64px 0;
+
+   
+
 }
 
+@media screen and (max-width: 550px){
+   >main{
+    padding: 30px;
+    
+
+    h1 {
+        padding-top: 0;
+    }
+   } 
+
+}
 
 
 `

@@ -8,16 +8,21 @@ import { Note } from '../../components/note';
 import { Section } from '../../components/section';
 import { Link } from 'react-router-dom'
 import { api } from '../../services/api';
-
+import { useNavigate } from 'react-router-dom';
 export function Home() {
 
  const [tags, setTags] = useState([])
  const [tagsSelected, setTagsSelected] = useState([])
  const [search, setSearch] = useState([])
  const [notes, setNotes] = useState([]);
-
+const navigate = useNavigate()
 
  function handleTagSelected(tagName){
+
+  if(tagName === "all"){
+    return setTagsSelected([])
+  }
+
   const alreadySelected = tagsSelected.includes(tagName)
   if(alreadySelected){
    const filteredTags = tagsSelected.filter(tag => tag !== tagName);
@@ -29,6 +34,11 @@ export function Home() {
   
 
  }
+
+
+function handleDetails(id){
+navigate(`/details/${id}`)
+}
 
 
 
@@ -46,7 +56,6 @@ export function Home() {
  useEffect(() => {
 async function fetchNotes(){
  const response = await api.get(`/notes?title=${search}&tags=${tagsSelected}`);
- console.log(response.data)
  setNotes(response.data)
 }
 fetchNotes()
@@ -61,7 +70,7 @@ fetchNotes()
    <Brand>
     <h1>Rocket Notes</h1>
    </Brand>
-   <Header />
+
    <Menu>
    <li> 
        <ButtonText 
@@ -88,6 +97,7 @@ fetchNotes()
 
 
    </Menu>
+   <Header />
    <Search>
    <Input
   placeholder="Pesquisar pelo titulo"
@@ -103,7 +113,10 @@ fetchNotes()
   notes.map(note => (
    <Note
    key={String(note.id)}
-   data={note}/>
+   data={note}
+   onClick={() => handleDetails(note.id)}
+   />
+  
   ))
 
 
