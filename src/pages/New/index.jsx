@@ -47,6 +47,9 @@ async function handleNewNote(){
     if(newTag){
         return alert("Voce deixou alguma tag no campo de adicionar, porem nao clicou pra adicionar!");
     }
+    if(tags.length === 0){
+        return alert("Adicione pelo menos uma tag!");
+    }
    
 api.post("/notes" , {
     title,
