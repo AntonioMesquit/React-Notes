@@ -19,18 +19,18 @@ export function New() {
   const [newTag, setNewTag] = useState("")
   const navigate = useNavigate()
 
-  // Função para gerar IDs únicos para os links
+
   function generateLinkId() {
     return Date.now().toString();
   }
 
-  // Função para gerar IDs únicos para as tags
+
   function generateTagId() {
     return Date.now().toString();
   }
 
   function handleAddLink() {
-    const newLinkId = generateLinkId(); // Gere um novo ID para o link
+    const newLinkId = generateLinkId(); 
     const newLinkObject = { id: newLinkId, value: newLink };
     setLinks(prevLinks => [...prevLinks, newLinkObject]);
     setNewLink("");
@@ -41,7 +41,7 @@ export function New() {
   }
 
   function handleAddTag() {
-    const newTagId = generateTagId(); // Gere um novo ID para a tag
+    const newTagId = generateTagId(); 
     const newTagObject = { id: newTagId, value: newTag };
     setTags(prevTags => [...prevTags, newTagObject]);
     setNewTag("");
@@ -69,7 +69,7 @@ export function New() {
       title,
       description,
       tags,
-      links: links.map(link => link.value) // Obtém apenas os valores dos links
+      links: links.map(link => link.value) 
     }
 
     try {
