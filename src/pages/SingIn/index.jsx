@@ -6,14 +6,25 @@ import {Button} from '../../components/button'
 import {FiMail, FiLock} from 'react-icons/fi'
 import {useAuth} from '../../hooks/auth'
 
-export function SignIn(){
-const { signIn } = useAuth();
-const [email, setEmail] = useState("")
-const [password, setPassword] = useState("")
-function handleSignIn(){
-    signIn({email, password})
-}
-
+function isValidEmail(email) {
+    const emailRegex = /^[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Za-z]{2,}$/;
+    return emailRegex.test(email);
+  }
+  
+  export function SignIn() {
+    const { signIn } = useAuth();
+    const [email, setEmail] = useState('');
+    const [password, setPassword] = useState('');
+  
+    function handleSignIn() {
+      if (!isValidEmail(email)) {
+        alert('Endereço de e-mail inválido');
+        return;
+      }
+  
+      signIn({ email, password });
+    }
+  
 
 
     return(
