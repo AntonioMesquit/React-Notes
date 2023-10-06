@@ -19,13 +19,18 @@ export function New() {
   const [newTag, setNewTag] = useState("")
   const navigate = useNavigate()
 
- 
+  // Função para gerar IDs únicos para os links
   function generateLinkId() {
     return Date.now().toString();
   }
 
+  // Função para gerar IDs únicos para as tags
+  function generateTagId() {
+    return Date.now().toString();
+  }
+
   function handleAddLink() {
-    const newLinkId = generateLinkId(); 
+    const newLinkId = generateLinkId(); // Gere um novo ID para o link
     const newLinkObject = { id: newLinkId, value: newLink };
     setLinks(prevLinks => [...prevLinks, newLinkObject]);
     setNewLink("");
@@ -36,12 +41,14 @@ export function New() {
   }
 
   function handleAddTag() {
-    setTags(prevState => [...prevState, newTag])
-    setNewTag("")
+    const newTagId = generateTagId(); // Gere um novo ID para a tag
+    const newTagObject = { id: newTagId, value: newTag };
+    setTags(prevTags => [...prevTags, newTagObject]);
+    setNewTag("");
   }
 
-  function handleRemoveTag(deleted) {
-    setTags(prevState => prevState.filter(tag => tag !== deleted))
+  function handleRemoveTag(idToDelete) {
+    setTags(prevTags => prevTags.filter(tag => tag.id !== idToDelete));
   }
 
   async function handleNewNote() {
@@ -57,12 +64,12 @@ export function New() {
     if (tags.length === 0) {
       return alert("Adicione pelo menos uma tag!");
     }
-   
+
     const noteData = {
       title,
       description,
       tags,
-      links: links.map(link => link.value)
+      links: links.map(link => link.value) // Obtém apenas os valores dos links
     }
 
     try {
@@ -109,11 +116,11 @@ export function New() {
           </Section>
           <Section title="Marcadores">
             <div className='tags'>
-              {tags.map((tag, index) => (
+              {tags.map(tag => (
                 <NoteItem
-                  key={String(index)}
-                  value={tag}
-                  onClick={() => handleRemoveTag(tag)}
+                  key={tag.id}
+                  value={tag.value}
+                  onClick={() => handleRemoveTag(tag.id)}
                 />
               ))}
               <NoteItem
