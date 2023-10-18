@@ -5,6 +5,8 @@ import {Input} from '../../components/input'
 import {Button} from '../../components/button'
 import {FiMail, FiLock} from 'react-icons/fi'
 import {useAuth} from '../../hooks/auth'
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 function isValidEmail(email) {
     const emailRegex = /^[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Za-z]{2,}$/;
@@ -18,7 +20,16 @@ function isValidEmail(email) {
   
     function handleSignIn() {
       if (!isValidEmail(email)) {
-        alert('Endereço de e-mail inválido');
+        toast.error('O Email ou Senha digitado esta incorreto', {
+          position: "top-right",
+          autoClose: 5000,
+          hideProgressBar: false,
+          closeOnClick: true,
+          pauseOnHover: true,
+          draggable: true,
+          progress: undefined,
+          theme: "dark",
+          });
         return;
       }
   
@@ -30,6 +41,7 @@ function isValidEmail(email) {
     return(
 
      <Container>
+      <ToastContainer />
      <Form>
         <h1>Rocket Notes</h1>
         <p>Aplicacao para salvar e gerenciar seus links uteis.</p>

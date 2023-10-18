@@ -5,12 +5,14 @@ import { api } from "../../services/api"
 import {FiUser, FiMail, FiLock} from 'react-icons/fi'
 import { Link, useNavigate} from 'react-router-dom'
 import { useState } from 'react'
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 function isValidEmail(email) {
     const emailRegex = /^[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Za-z]{2,}$/;
     return emailRegex.test(email);
   }
-  
+
 export function SignUp() {
     const [name, setName] = useState("");
     const [email, setEmail] = useState("");
@@ -19,16 +21,45 @@ export function SignUp() {
   
     function handleSignUp() {
       if (!name || !email || !password) {
-        return alert("Preencha todos os campos");
+        return toast.error('Preencha todos os campos', {
+          position: "top-right",
+          autoClose: 5000,
+          hideProgressBar: false,
+          closeOnClick: true,
+          pauseOnHover: true,
+          draggable: true,
+          progress: undefined,
+          theme: "dark",
+          });
+        
       }
   
       if (!isValidEmail(email)) {
-        return alert("Endereço de e-mail inválido");
+        return toast.error('Endereco email/senha invalido', {
+          position: "top-right",
+          autoClose: 5000,
+          hideProgressBar: false,
+          closeOnClick: true,
+          pauseOnHover: true,
+          draggable: true,
+          progress: undefined,
+          theme: "dark",
+          });
       }
-  
+      
       api.post("/users", { name, email, password })
-        .then(() => {
-          alert("Usuário cadastrado com sucesso!");
+        .then(async () => {
+          toast.success('Usuario cadastrado com sucesso!', {
+            position: "top-right",
+            autoClose: 5000,
+            hideProgressBar: false,
+            closeOnClick: true,
+            pauseOnHover: true,
+            draggable: true,
+            progress: undefined,
+            theme: "dark",
+            });
+          await new Promise(resolve => setTimeout(resolve, 5000));
           navigate("/");
         })
         .catch(error => {
@@ -38,6 +69,7 @@ export function SignUp() {
             alert("Não foi possível cadastrar");
           }
         });
+       
     }
 
     return(
@@ -45,6 +77,7 @@ export function SignUp() {
      <Container>
         <Background/>
      <Form>
+     <ToastContainer />
         <h1>Rocket Notes</h1>
         <p>Aplicacao para salvar e gerenciar seus links uteis.</p>
 

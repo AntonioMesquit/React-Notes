@@ -9,6 +9,8 @@ import { useState } from 'react'
 import { api } from '../../services/api'
 import { Container, Form } from './style'
 import { useNavigate } from 'react-router-dom'
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 export function New(){
 
@@ -39,16 +41,24 @@ function handleRemoveTag(deleted){
 }
 async function handleNewNote(){
     if(!title){
-        return alert("Digite o titulo da nota!")
+        return toast.error("Digite o titulo da nota!" , {
+            theme: "dark"
+        })
     }
     if(newLink){
-        return alert("Voce deixou algum Link no campo de adicionar, porem nao clicou pra adicionar!");
+        return toast.error("Voce deixou algum Link no campo de adicionar, porem nao clicou pra adicionar!", {
+            theme: "dark"
+        });
     }
     if(newTag){
-        return alert("Voce deixou alguma tag no campo de adicionar, porem nao clicou pra adicionar!");
+        return toast.error("Voce deixou alguma Tag no campo de adicionar, porem nao clicou pra adicionar!", {
+            theme: "dark"
+        });
     }
     if(tags.length === 0){
-        return alert("Adicione pelo menos uma tag!");
+        return toast.error("Adicione pelo menos uma tag", {
+            theme: "dark"
+        });
     }
    
 api.post("/notes" , {
@@ -57,7 +67,8 @@ api.post("/notes" , {
     tags,
     links
 })
-alert("Nota criada com sucesso!");
+toast.success("Nota criada com sucesso!"); 
+await new Promise(resolve => setTimeout(resolve, 4000));
 navigate("/")
 }
 
@@ -65,6 +76,7 @@ navigate("/")
 
  return(
     <Container>
+        <ToastContainer/>
 
    <Header/>
 

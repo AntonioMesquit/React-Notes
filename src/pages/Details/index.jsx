@@ -8,6 +8,8 @@ import { ButtonText } from '../../components/buttonText'
 import { useEffect, useState } from 'react'
 import { api } from '../../services/api'
 import { useNavigate } from 'react-router-dom'
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 export function Details() {
 
 const [data, setData] = useState(null);
@@ -23,7 +25,10 @@ async function handleRemove(){
 
   if(confirm){
     await api.delete(`/notes/${params.id}`)
-    alert("Nota deletada com sucesso!");
+    toast.success("Nota deletada com sucesso!" , {
+      theme: "dark"
+    })
+    await new Promise(resolve => setTimeout(resolve, 4000))
     navigate("/")
   }
 }
@@ -43,10 +48,12 @@ fetchNotes()
 
   return (
     <Container>
+      <ToastContainer/>
       <Header />
 {
   data && 
       <main>
+        
         <Content>
 
           <ButtonText

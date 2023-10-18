@@ -1,5 +1,7 @@
 import { createContext, useContext, useState, useEffect } from "react";
 import { api } from "../services/api";
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 const AuthContext = createContext({})
 
@@ -58,7 +60,10 @@ function AuthProvider({ children }) {
 
       setData({user, token: data.token})
 
-      alert("Perfil atualizado!")
+      
+      toast.success("Profile updated" , {
+        theme: "dark"
+    });
 
     } catch (error) {
       if (error.response) {
