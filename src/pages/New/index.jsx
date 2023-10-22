@@ -67,7 +67,9 @@ api.post("/notes" , {
     tags,
     links
 })
-toast.success("Nota criada com sucesso!"); 
+toast.success("Nota criada com sucesso!" , {
+    theme: "dark"
+}); 
 await new Promise(resolve => setTimeout(resolve, 4000));
 navigate("/")
 }
